@@ -5,12 +5,20 @@ function agregarProyecto(){
     var nombreProyecto = document.getElementById("inputProyecto")
     nombreProyecto.innerHTML = ""
     var descripcionProyecto = document.getElementById("inputDescripcion")
+    descripcionProyecto.innerHTML = ""
     if(nombreProyecto != ""){
-        proyectos.push({
-            idProyecto: Math.floor(Math.random()),
-            nombre: nombreProyecto,
-            descripcion: descripcionProyecto
-        })
+        for(var i = 0; i < proyectos.length; i++){
+            if(proyectos.nombre[i] != nombreProyecto){
+                proyectos.push({
+                    idProyecto: Math.floor(Math.random()),
+                    nombre: nombreProyecto,
+                    descripcion: descripcionProyecto
+                })
+            }
+            else{
+                alert("Dos proyectos no pueden tener el mismo nombre")
+            }
+        }
     }else{
         alert("Es obligatorio que pongas un nombre al proyecto")
     }
@@ -32,18 +40,20 @@ function agregarTareaProyecto(idProyecto){
     }
 }
 
-
-//revisar esto
-function mostrarTareasProyecto(idTarea, idProyecto){
-    for(var i = 0; i < proyectos.length; i++){
-        if(proyectos.idTarea = idTarea){
-            tareasProyectos.descripcion = document.createElement("li")
-            tareasProyectos.estado = document.createElement("li")
-            tareasProyectos.fechaVencimiento = document.createElement("li")
+function mostrarTareas(idTarea){
+    for(var i = 0; i < tareasProyectos.length; i++){
+        if(tareasProyectos.idTarea[i] === tareasProyectos.idTarea){
+            tareasProyectos[i].descripcion = document.createElement("p")
+            tareasProyectos[i].estado = document.createElement("p")
+            tareasProyectos[i].fechaVencimiento = document.createElement("p")
         }
     }
 }
 
 function tareaCompletada(idProyecto, idTarea){
 
+}
+
+function mostrarProyectos(){
+    
 }
