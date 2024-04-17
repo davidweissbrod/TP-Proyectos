@@ -14,6 +14,7 @@ function agregarProyecto(){
                     nombre: nombreProyecto,
                     descripcion: descripcionProyecto
                 })
+                mostrarProyectos();
             }
             else{
                 alert("Dos proyectos no pueden tener el mismo nombre")
@@ -22,6 +23,7 @@ function agregarProyecto(){
     }else{
         alert("Es obligatorio que pongas un nombre al proyecto")
     }
+
 }
 
 function agregarTareaProyecto(idProyecto){
@@ -35,19 +37,25 @@ function agregarTareaProyecto(idProyecto){
             estado: "Pendiente",
             fechaVencimiento: "2024-04-12"
         })
+        mostrarTareas();
     }else{
         alert("La descripcion es obligatoria")
     }
 }
 
-function mostrarTareas(idTarea){
-    for(var i = 0; i < tareasProyectos.length; i++){
-        if(tareasProyectos.idTarea[i] === tareasProyectos.idTarea){
-            tareasProyectos[i].descripcion = document.createElement("p")
-            tareasProyectos[i].estado = document.createElement("p")
-            tareasProyectos[i].fechaVencimiento = document.createElement("p")
+function mostrarTareas(){
+    var tarea = document.getElementById("inputTarea")
+    tarea.innerHTML = ""
+    tareasProyectos.forEach(tarea => {
+        var li = document.createElement("li")
+        var checkbox = document.createElement("input")
+        checkbox.type = "checkbox"
+        if(checkbox.checked){
+            tarea.estado = "Completado"
         }
-    }
+        mostrarTareas()
+    })
+    li.appendChild('checkbox')
 }
 
 function tareaCompletada(idProyecto, idTarea){
@@ -58,6 +66,24 @@ function tareaCompletada(idProyecto, idTarea){
     }
 }
 
+function buscarPorFecha(){
+    var fechaBuscada = document.getElementById("inputFecha")
+    fechaBuscada.innerHTML = ""
+    for(var i = 0; i < tareasProyectos; i++){
+        if(tareasProyectos[i].fechaVencimiento === fechaBuscada){
+            let tarea = tareasProyectos[i].fechaVencimiento
+            tarea = createElement('p')
+            mostrarTareas()
+        }
+    }
+}
+
 function mostrarProyectos(){
-    
+    var nombreProyecto = document.getElementById("inputProyecto")
+    nombreProyecto.innerHTML = ""
+    proyectos.forEach(proyecto => {
+        var li = document.createElement('li')
+        li.textContent = proyecto.nombre
+        nombreProyecto.appendChild(li)
+    }) 
 }

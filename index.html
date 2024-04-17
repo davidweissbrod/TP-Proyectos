@@ -4,15 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>TP Proyectos</title>
 </head>
 <body>
-    <header>
+    <header class = "header">
         <h2>Proyectos</h2>
         <input type="text" id="inputProyecto" placeholder="Nombre del proyecto..." required>
         <input type="text" id="inputDescripcion" placeholder="Descripcion...">
-        <button class = "btn-agregarProyecto" onclick="agregarProyecto()"></button>
+        <button class = "btn-agregar" onclick="agregarProyecto()">Agregar Proyecto</button>
+        <input type="text" id="inputTarea" placeholder="Tarea...">
+        <button class="btn-agregar" onclick="agregarTareaProyecto()">Agregar Tarea</button>
     </header>
-    <ul id="listaProyectos"></ul>
+    <br>
+    <br>
+    <div class="fecha">
+        <input type="text" id="inputFecha" placeholder="Fecha...">
+        <button class="buscar-fecha" onclick="buscarPorFecha()">Buscar por fecha</button>
+    </div>
 </body>
 </html>
