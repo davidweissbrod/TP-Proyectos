@@ -51,7 +51,11 @@ function mostrarTareas(idTarea){
 }
 
 function tareaCompletada(idProyecto, idTarea){
-
+    for(var i = 0; i < proyectos.length; i++){
+        if(proyectos[i].idProyecto === idProyecto && proyectos[i].idTarea === idTarea){
+            tareasProyectos.push(["estado", "Completado" ])
+        }
+    }
 }
 
 function mostrarProyectos(){
