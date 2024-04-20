@@ -2,9 +2,9 @@ var proyectos = []
 var tareasProyectos = []
 
 function agregarProyecto(){
-    var nombreProyecto = document.getElementById("inputProyecto")
+    var nombreProyecto = document.getElementById("inputProyecto").value
     nombreProyecto.innerHTML = ""
-    var descripcionProyecto = document.getElementById("inputDescripcion")
+    var descripcionProyecto = document.getElementById("inputDescripcion").value
     descripcionProyecto.innerHTML = ""
     if(nombreProyecto != ""){
         for(var i = 0; i < proyectos.length; i++){
@@ -27,35 +27,77 @@ function agregarProyecto(){
 }
 
 function agregarTareaProyecto(idProyecto){
-    var descripcionTarea = document.getElementById("inputTarea")
-    descripcionTarea.innerHTML = ""
-    if(descripcionTarea != ""){
-        tareasProyectos.push({
-            idTarea: Math.floor(Math.random()),
-            idProyecto: idProyecto,
-            descripcion: descripcionTarea,
-            estado: "Pendiente",
-            fechaVencimiento: "2024-04-12"
-        })
-        mostrarTareas();
-    }else{
-        alert("La descripcion es obligatoria")
-    }
+    var nombreProyecto = document.getElementById("inputProyecto")
+    proyectos.forEach(proyecto => {
+        if(proyecto.nombre === nombreProyecto){
+            var descripcionTarea = getElementById("inputTarea")
+            descripcionTarea.innerHTML = ""
+            var estadoTarea = "Pendiente"
+            var fechaVen = new Date(document.getElementsById("inputFecha"))
+            fechaVen.innerHTML = ""
+            if(descripcionTarea != ""){
+                tareasProyectos.push({
+                    idTarea: Math.floor(Math.random()),
+                    idProyecto: idProyecto,
+                    descripcion: descripcionTarea,
+                    estado: estadoTarea,
+                    fechaVencimiento: fechaVen
+                })
+                mostrarTareas();
+            }else{
+                alert("La descripcion es obligatoria")
+            }
+        }else{
+            alert("No existe un proyecto con ese nombre")
+        }
+    });
 }
 
-function mostrarTareas(){
-    var tarea = document.getElementById("inputTarea")
-    tarea.innerHTML = ""
-    tareasProyectos.forEach(tarea => {
-        var li = document.createElement("li")
-        var checkbox = document.createElement("input")
-        checkbox.type = "checkbox"
-        if(checkbox.checked){
-            tarea.estado = "Completado"
-        }
-        mostrarTareas()
-    })
-    li.appendChild('checkbox')
+function mostrarTareas() {
+    let proyectosHTML = document.getElementById('inputProyectos');
+    proyectosHTML.innerHTML = '';
+    let nombreProyecto = document.getElementById('proyecto').value;
+    let proyecto = arrayProyectos.find(proyecto => proyecto.nombre === nombreProyecto);
+    if (proyecto) {
+        let proyectoDiv = document.createElement('div');
+        proyectoDiv.classList.add('proyecto');
+
+        let nombreProyectoHeader = document.createElement('h2');
+        nombreProyectoHeader.textContent = proyecto.nombre;
+
+        let descripcionProyecto = document.createElement('p');
+        descripcionProyecto.textContent = proyecto.descripcion;
+
+        proyectoDiv.appendChild(nombreProyectoHeader);
+        proyectoDiv.appendChild(descripcionProyecto);
+
+        let tareasList = document.createElement('ul');
+        proyecto.tareas.forEach(tarea => {
+            let tareaItem = document.createElement('li');
+            let checkbox = document.createElement('input');
+            checkbox.type = "checkbox";
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    tareaItem.style.textDecoration = "line-through";
+                } else {
+                    tareaItem.style.textDecoration = "none";
+                }
+            });
+            
+            let tareaNombre = document.createElement('span');
+            let nom = tarea.nombre;
+            tareaNombre.textContent = "Nombre: " + nom.nombre + ", Descripción: " + nom.descripcion + ", Fecha: " + nom.fecha;
+            
+            tareaItem.appendChild(checkbox);
+            tareaItem.appendChild(tareaNombre);
+            tareasList.appendChild(tareaItem);
+        });
+
+        proyectoDiv.appendChild(tareasList);
+        proyectosHTML.appendChild(proyectoDiv);
+    } else {
+        console.log("No se encontró ningún proyecto con el nombre '" + nombreProyecto + "'.");
+    }
 }
 
 function tareaCompletada(idProyecto, idTarea){
