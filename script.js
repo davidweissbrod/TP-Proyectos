@@ -1,6 +1,18 @@
 var proyectos = []
-var tareasProyectos = []
-
+function Tarea(descripcion, fecha, estado) {
+    this.descripcion = descripcion;
+    this.fecha = fecha;
+    this.estado = estado;
+}
+function Proyecto(nombre, descripcion) {
+    this.nombre = nombre;
+    this.descripcion = descripcion;
+    this.tareas = [];
+    this.agregarTarea = function(nombre, descripcion, fecha) {
+        let nuevaTarea = new Tarea(nombre, descripcion, fecha);
+        this.tareas.push(nuevaTarea);
+    }
+}
 function agregarProyecto(){
     var nombreProyecto = document.getElementById("inputProyecto").value
     nombreProyecto.innerHTML = ""
@@ -9,14 +21,11 @@ function agregarProyecto(){
     if(nombreProyecto != ""){
         for(var i = 0; i < proyectos.length; i++){
             if(proyectos.nombre[i] != nombreProyecto){
-                proyectos.push({
-                    idProyecto: Math.floor(Math.random()),
-                    nombre: nombreProyecto,
-                    descripcion: descripcionProyecto
-                })
+                var proyectoIngresado = new Proyecto(nombreProyecto, descripcionProyecto)
+                proyectos.push(proyectoIngresado)
                 mostrarProyectos();
-            }
-            else{
+            
+            }else{
                 alert("Dos proyectos no pueden tener el mismo nombre")
             }
         }
@@ -26,7 +35,7 @@ function agregarProyecto(){
 
 }
 
-function agregarTareaProyecto(idProyecto){
+function agregarTareaProyecto(){
     var nombreProyecto = document.getElementById("inputProyecto")
     proyectos.forEach(proyecto => {
         if(proyecto.nombre === nombreProyecto){
@@ -35,14 +44,9 @@ function agregarTareaProyecto(idProyecto){
             var estadoTarea = "Pendiente"
             var fechaVen = new Date(document.getElementsById("inputFecha"))
             fechaVen.innerHTML = ""
+            var tareaIngresada = new Tarea(descripcionTarea, fechaVen, estadoTarea)
             if(descripcionTarea != ""){
-                tareasProyectos.push({
-                    idTarea: Math.floor(Math.random()),
-                    idProyecto: idProyecto,
-                    descripcion: descripcionTarea,
-                    estado: estadoTarea,
-                    fechaVencimiento: fechaVen
-                })
+                proyectos[i].agregarTarea(tareaIngresada)
                 mostrarTareas();
             }else{
                 alert("La descripcion es obligatoria")
@@ -54,53 +58,10 @@ function agregarTareaProyecto(idProyecto){
 }
 
 function mostrarTareas() {
-    let proyectosHTML = document.getElementById('inputProyectos');
-    proyectosHTML.innerHTML = '';
-    let nombreProyecto = document.getElementById('proyecto').value;
-    let proyecto = arrayProyectos.find(proyecto => proyecto.nombre === nombreProyecto);
-    if (proyecto) {
-        let proyectoDiv = document.createElement('div');
-        proyectoDiv.classList.add('proyecto');
-
-        let nombreProyectoHeader = document.createElement('h2');
-        nombreProyectoHeader.textContent = proyecto.nombre;
-
-        let descripcionProyecto = document.createElement('p');
-        descripcionProyecto.textContent = proyecto.descripcion;
-
-        proyectoDiv.appendChild(nombreProyectoHeader);
-        proyectoDiv.appendChild(descripcionProyecto);
-
-        let tareasList = document.createElement('ul');
-        proyecto.tareas.forEach(tarea => {
-            let tareaItem = document.createElement('li');
-            let checkbox = document.createElement('input');
-            checkbox.type = "checkbox";
-            checkbox.addEventListener('change', function() {
-                if (this.checked) {
-                    tareaItem.style.textDecoration = "line-through";
-                } else {
-                    tareaItem.style.textDecoration = "none";
-                }
-            });
-            
-            let tareaNombre = document.createElement('span');
-            let nom = tarea.nombre;
-            tareaNombre.textContent = "Nombre: " + nom.nombre + ", Descripción: " + nom.descripcion + ", Fecha: " + nom.fecha;
-            
-            tareaItem.appendChild(checkbox);
-            tareaItem.appendChild(tareaNombre);
-            tareasList.appendChild(tareaItem);
-        });
-
-        proyectoDiv.appendChild(tareasList);
-        proyectosHTML.appendChild(proyectoDiv);
-    } else {
-        console.log("No se encontró ningún proyecto con el nombre '" + nombreProyecto + "'.");
-    }
+    
 }
 
-function tareaCompletada(idProyecto, idTarea){
+function tareaCompletada(){
     for(var i = 0; i < proyectos.length; i++){
         if(proyectos[i].idProyecto === idProyecto && proyectos[i].idTarea === idTarea){
             tareasProyectos.push(["estado", "Completado" ])
@@ -114,7 +75,7 @@ function buscarPorFecha(){
     for(var i = 0; i < tareasProyectos; i++){
         if(tareasProyectos[i].fechaVencimiento === fechaBuscada){
             let tarea = tareasProyectos[i].fechaVencimiento
-            tarea = createElement('p')
+            tarea = document.createElement('p')
             mostrarTareas()
         }
     }
