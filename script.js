@@ -36,7 +36,7 @@ function agregarProyecto(){
 }
 
 function agregarTareaProyecto(){
-    var nombreProyecto = document.getElementById("inputProyecto")
+    var nombreProyecto = document.getElementById("proyectoNom")
     proyectos.forEach(proyecto => {
         if(proyecto.nombre === nombreProyecto){
             var descripcionTarea = getElementById("inputTarea")
@@ -58,35 +58,72 @@ function agregarTareaProyecto(){
 }
 
 function mostrarTareas() {
+    var proy = document.getElementById("proyectos")
+    proy.innerHTML = ""
+    var nombreProyecto = document.getElementById('nombreProyecto').value;
+    proyectos.forEach(proyecto => {
+        if(proyecto[i].nombre === nombreProyecto){
+            var proyectoDiv = document.createElement('div')
+            proyectoDiv.classList.add('proyecto')
+            var proyectoHeader = document.createElement('h2')
+            proyectoHeader.textContent = proyecto.nombre
+            var descripcionProyecto = document.createElement('p')
+            descripcionProyecto.textContent = proyecto.descripcion
+
+            proyectoDiv.appendChild(proyectoHeader);
+            proyectoDiv.appendChild(descripcionProyecto);
+
+            var listaTareas = document.createElement("ul")
+            proyecto.tareas.forEach(tarea => {
+            var tareaItem = document.createElement('li');
+            var checkbox = document.createElement('input');
+            checkbox.type = "checkbox";
+            checkbox.addEventListener('change', function() {
+                if (this.checked){
+                    proyecto.estado = "Completado"
+                } 
+            });
+                
+                var tareaNombre = document.createElement('span');
+                var tar = tarea.nombre;
+                tareaNombre.textContent = "Nombre: " + tar.nombre + ", Descripción: " + tar.descripcion + ", Fecha: " + tar.fecha;
+                
+                tareaItem.appendChild(checkbox);
+                tareaItem.appendChild(tareaNombre);
+                listaTareas.appendChild(tareaItem);
+            });
     
+            proyectoDiv.appendChild(tareasList);
+            proy.appendChild(proyectoDiv);
+        }
+    })
 }
 
-function tareaCompletada(){
-    for(var i = 0; i < proyectos.length; i++){
-        if(proyectos[i].idProyecto === idProyecto && proyectos[i].idTarea === idTarea){
-            tareasProyectos.push(["estado", "Completado" ])
-        }
-    }
-}
 
 function buscarPorFecha(){
-    var fechaBuscada = document.getElementById("inputFecha")
-    fechaBuscada.innerHTML = ""
-    for(var i = 0; i < tareasProyectos; i++){
-        if(tareasProyectos[i].fechaVencimiento === fechaBuscada){
-            let tarea = tareasProyectos[i].fechaVencimiento
-            tarea = document.createElement('p')
-            mostrarTareas()
-        }
-    }
+    var fechaVencimiento = document.getElementById('buscarFecha').value;
+    var tareas = proyectos.flatMap(proyecto => proyecto.tareas.filter(tarea => tarea.fechaVencimiento === fechaVencimiento))
+    var listaTareas = document.getElementById('taskList')
+    listaTareas.innerHTML = ''
+    tareas.forEach((tarea) => {
+        var listaItem = document.createElement('li');
+        listaItem.textContent = tarea.descripcion + "Estado: " + tarea.estado + "Fecha de vencimiento: " + tarea.fecha 
+        listaTareas.appendChild(listItem)
+    }); 
 }
 
 function mostrarProyectos(){
-    var nombreProyecto = document.getElementById("inputProyecto")
-    nombreProyecto.innerHTML = ""
-    proyectos.forEach(proyecto => {
-        var li = document.createElement('li')
-        li.textContent = proyecto.nombre
-        nombreProyecto.appendChild(li)
-    }) 
+    var proy = document.getElementById('proyectos');
+    proy.innerHTML = '';
+    proyectos.forEach(proyecto =>{
+        var proyectoDiv = document.createElement('div');
+        proyectoDiv.classList.add('proyecto'); 
+        var nombreProyecto = document.createElement('h2');
+        nombreProyecto.textContent = proyecto.nombre;  
+        var descripcionProyecto = document.createElement('p');
+        descripcionProyecto.textContent = proyecto.descripcion; 
+        proyectoDiv.appendChild(nombreProyecto);
+        proyectoDiv.appendChild(descripcionProyecto);
+        proy.appendChild(proyectoDiv);
+    })
 }

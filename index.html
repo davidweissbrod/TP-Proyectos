@@ -13,15 +13,27 @@
         <input type="text" id="inputProyecto" placeholder="Nombre del proyecto..." required>
         <input type="text" id="inputDescripcion" placeholder="Descripcion...">
         <button class = "btn-agregar" onclick="agregarProyecto()">Agregar Proyecto</button>
+        <br>
         <input type="text" id="inputTarea" placeholder="Tarea...">
+        <input type="date" id="inputFecha" placeholder="Ingresar Fecha...">
         <button class="btn-agregar" onclick="agregarTareaProyecto()">Agregar Tarea</button>
     </header>
     <br>
     <br>
+    <div class="buscar-tareas">
+        <input type="text" id="proyectos" placeholder="Poryecto...">
+        <button class = "btn-mostrarTareas" onclick="mostrarTareas()">Mostrar Tareas</button>
+    </div>
+    <br>
     <div class="fecha">
-        <input type="text" id="inputFecha" placeholder="Fecha...">
+        <input type="date" id="inputFecha" placeholder="Fecha...">
         <button class="buscar-fecha" onclick="buscarPorFecha()">Buscar por fecha</button>
     </div>
-    <div class="proyecto"></div>
+    <div class="proyectos-mostrar">
+        <button class="btn-mostrarProy" onclick="mostrarProyectos()">Mostrar proyectos</button>
+        <div class="proyecto"></div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

@@ -1,54 +1,80 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
 .header {
-    background-color: whitesmoke;
-    padding: 30px 40px;
-    color: rgb(80, 80, 80);
-    text-align: center;
-  }
-  
-  .header:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  
-  .header input {
-    border: none;
-    width: 75%;
-    padding: 10px;
-    float: left;
-    font-size: 16px;
-  }
+  background-color: #4CAF50;
+  padding: 20px;
+  text-align: center;
+  color: white;
+}
 
-  .btn-agregar {
-    padding: 10px;
-    width: 25%;
-    background: #d9d9d9;
-    color: rgb(63, 63, 63);
-    float: left;
-    text-align: center;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-    border: none;
-  }
+.header h2 {
+  margin: 0;
+}
 
-  .buscar-fecha{
-    text-align: center;
-    padding: 10px;
-    width: 20%;
-    background: #d9d9d9;
-    color: rgb(107, 105, 105);
-    font-size: 12px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
+.input-group {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
 
-  .fecha{
-    text-align: center;
-  }
+.input-group input[type="text"] {
+  padding: 10px;
+  margin: 0 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
 
-  .fecha input{
-    border: none;
-    font-size: 12px;
-    padding: 5px;
-  }
+.input-group button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #45a049;
+  color: white;
+  cursor: pointer;
+}
+
+.input-group button:hover {
+  background-color: #3d8b3d;
+}
+
+.content {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 20px;
+  width: 300px;
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+.btn-mostrar {
+  background-color: #008CBA;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-mostrar:hover {
+  background-color: #005f6b;
+}
+
+.proyectos-mostrar{
+  text-align: center;
+}
